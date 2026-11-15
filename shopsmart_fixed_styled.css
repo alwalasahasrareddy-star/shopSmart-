@@ -175,6 +175,7 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
     .rowtitle { margin-top: 35px; }
     .detail { grid-template-columns: 1fr; gap: 12px; padding: 14px; }
     .bigpic { min-height: 260px; }
+    .bigpic > .product-image { height: 260px; }
     .detail > div:last-child { padding: 10px 5px; }
     .cartlayout { grid-template-columns: 1fr; }
     .cartitem { gap: 9px; padding: 10px; }
@@ -285,11 +286,20 @@ button:focus-visible, input:focus-visible, a:focus-visible { outline: 3px solid 
 .card:nth-child(4n+4) .pic { background: #f3edf7; }
 .product-emoji { font-size: 79px; filter: drop-shadow(0 14px 12px rgb(38 42 73 / 13%)); transition: transform .25s ease; }
 .card:hover .product-emoji { transform: scale(1.09) rotate(-5deg); }
+.pic > .product-image { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease; }
+.card:hover .pic > .product-image { transform: scale(1.04); }
+.bigpic { overflow: hidden; }
+.bigpic > .product-image { width: 100%; height: 390px; object-fit: contain; }
+.bigpic > .product-emoji { font-size: clamp(100px, 15vw, 170px); }
+.mini { overflow: hidden; }
+.mini > .cart-image { width: 100%; height: 100%; object-fit: cover; }
+.mini > .product-emoji { font-size: 34px; }
 .tag { top: 14px; left: 14px; border-radius: 20px; background: white; color: #4a56c4; box-shadow: 0 3px 12px rgb(30 34 61 / 7%); }
 .card-arrow { position: absolute; right: 13px; bottom: 13px; display: grid; width: 30px; height: 30px; place-items: center; border-radius: 50%; background: white; color: #454b65; opacity: 0; transform: translateY(3px); transition: opacity .18s, transform .18s; }
 .card:hover .card-arrow { opacity: 1; transform: translateY(0); }
 .info { padding: 15px 16px 14px; }
 .product-category { display: block; margin-bottom: 5px; color: #9297a7; font-size: 9px; font-weight: 600; letter-spacing: .04em; }
+.product-brand { color: #4658d8; font-weight: 800; }
 .info h3 { font-size: 13px; }
 .product-bottom { display: flex; align-items: end; justify-content: space-between; gap: 8px; margin-top: 10px; }
 .product-bottom .price { margin: 6px 0 0; color: #252a41; font-size: 15px; }

@@ -1,10 +1,11 @@
 # ShopSmart
 
-ShopSmart is a responsive, browser-based shopping demo with a 35-product catalog, product search, category filters, a persistent shopping cart, and a voice-shopping assistant.
+ShopSmart is a responsive, browser-based shopping demo with a 42-product catalog, product search, category filters, a persistent shopping cart, and a voice-shopping assistant.
 
 ## Features
 
 - Browse products across electronics, fashion, and home categories.
+- Explore branded sample listings, including Apple, Samsung, Sony, JBL, Nike, Adidas, and Casio products.
 - Search the catalog in English or any of the supported Indian-language scripts, open product details, and see related products.
 - Add and remove items from the cart. Cart contents are saved in browser `localStorage`.
 - Ask for any catalog product by typing or speaking its name or a supported product keyword in English, Hindi, Telugu, Tamil, Kannada, Bengali, Marathi, Gujarati, or Malayalam.
@@ -18,6 +19,7 @@ ShopSmart is a responsive, browser-based shopping demo with a 35-product catalog
 | `shopsmart_fixed_styled.html` | Page structure and links to the stylesheet and script |
 | `shopsmart_fixed_styled.css` | Storefront, product, cart, and voice-assistant styles |
 | `shopsmart_fixed_styled.js` | Product catalog and shopping, search, cart, and recommendation interactions |
+| `assets/products/` | Product photos and `credits.json` with source and license information |
 
 ## Run locally
 
@@ -47,6 +49,7 @@ The voice assistant is a client-side demonstration, **not a trained AI model**. 
 
 ## Notes
 
-- Products, prices, and ratings are sample data for demonstration.
+- Products, prices, and ratings are sample data for demonstration. Brand names and photos identify the pictured products; ShopSmart is not affiliated with or an authorized retailer for those brands, and listings do not represent verified stock.
+- Product photos are from Wikimedia Commons. Their creators, source pages, and licenses are listed in [`assets/products/credits.json`](assets/products/credits.json).
 - Checkout is simulated. No order or payment is processed.
 - The project uses plain HTML, CSS, and JavaScript; no backend or external API is required.
