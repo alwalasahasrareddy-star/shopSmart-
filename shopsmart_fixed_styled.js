@@ -75,13 +75,159 @@ const P=[
                 [['night light','nightlight','bedside','night','lamp','lighting'],[5,32]],
                 [['hydration','hydrate','water bottle','gym'],[2,18,27,33]]
             ];
+            voiceIntents.push(
+                [['हेडफोन','हेडफ़ोन','इयरफोन','ईयरफोन','संगीत','गाना','गाने'],[1,9,21,25]],
+                [['घड़ी','स्मार्टवॉच','फिटनेस','व्यायाम'],[2,15]],
+                [['जूते','दौड़','चलने','रनिंग'],[3,14]],
+                [['बैकपैक','बैग','यात्रा'],[4,18,26]],
+                [['लैंप','दीपक','दीया','मेज','पढ़ाई'],[5,32]],
+                [['कॉफी','कैमरा','तस्वीर'],[6,7,31]],
+                [['कैमरा','फोटो','तस्वीर','वेबकैम'],[7,23]],
+                [['हुडी','स्वेटशर्ट','गर्म','कपड़े'],[8,13,16,29,30]],
+                [['स्पीकर','ब्लूटूथ','पार्टी'],[9,21]],
+                [['माउस','कंप्यूटर','लैपटॉप'],[10]],
+                [['टैबलेट','पढ़ना','पढ़ने'],[11]],
+                [['गेमिंग','गेम','कंट्रोलर'],[22]],
+                [['चार्जर','चार्जिंग','बैटरी','पावर बैंक'],[24]],
+                [['टीवी','टेलीविजन','फिल्म'],[12]],
+                [['जैकेट','डेनिम','कपड़े','फैशन','पोशाक','शर्ट'],[13,16,26,27,28,29,30]],
+                [['कुशन','तकिया','कंबल'],[17,35]],
+                [['मग','पानी','बोतल'],[18,33]],
+                [['पौधा','पौधे','गमला','बगीचा','सजावट'],[19,20,32]],
+                [['हेడ్‌ఫోన్స్','హెడ్ఫోన్స్','హెడ్‌ఫోన్','సంగీతం','పాటలు'],[1,9,21,25]],
+                [['గడియారం','స్మార్ట్‌వాచ్','ఫిట్‌నెస్','వ్యాయామం'],[2,15]],
+                [['షూస్','బూట్లు','పరుగెత్తడం','నడక'],[3,14]],
+                [['బ్యాగ్','బ్యాక్‌ప్యాక్','ప్రయాణం'],[4,18,26]],
+                [['దీపం','ల్యాంప్','చదువు','డెస్క్'],[5,32]],
+                [['కాఫీ','కెమెరా','ఫోటో'],[6,7,23,31]],
+                [['హూడీ','బట్టలు','చొక్కా'],[8,13,16,29,30]],
+                [['స్పీకర్','బ్లూటూత్'],[9,21]],
+                [['మౌస్','కంప్యూటర్','ల్యాప్‌టాప్'],[10]],
+                [['టాబ్లెట్','చదవడం'],[11]],
+                [['గేమింగ్','గేమ్','కంట్రోలర్'],[22]],
+                [['ఛార్జర్','ఛార్జింగ్','బ్యాటరీ'],[24]],
+                [['టీవీ','సినిమా'],[12]],
+                [['బట్టలు','దుస్తులు','ఫ్యాషన్'],[13,16,26,27,28,29,30]],
+                [['కుషన్','దిండు','దుప్పటి'],[17,35]],
+                [['నీళ్లు','సీసా','బాటిల్'],[18,33]],
+                [['మొక్క','మొక్కలు','కుండీ','అలంకరణ'],[19,20,32]],
+                [['ஹெட்போன்','ஹெட்ஃபோன்','இசை','பாடல்'],[1,9,21,25]],
+                [['கடிகாரம்','ஸ்மார்ட்வாட்ச்','உடற்பயிற்சி'],[2,15]],
+                [['ஷூ','காலணி','ஓடுதல்','நடை'],[3,14]],
+                [['பை','பேக்','பயணம்'],[4,18,26]],
+                [['விளக்கு','மேசை','படிப்பு'],[5,32]],
+                [['காபி','கேமரா','புகைப்படம்'],[6,7,23,31]],
+                [['ஹூடி','உடை','சட்டை'],[8,13,16,29,30]],
+                [['ஸ்பீக்கர்','ப்ளூடூத்'],[9,21]],
+                [['மவுஸ்','கணினி','லேப்டாப்'],[10]],
+                [['டேப்லெட்','வாசிப்பு'],[11]],
+                [['கேமிங்','கேம்','கண்ட்ரோலர்'],[22]],
+                [['சார்ஜர்','பேட்டரி'],[24]],
+                [['டிவி','தொலைக்காட்சி','திரைப்படம்'],[12]],
+                [['ஆடை','உடை','ஃபேஷன்'],[13,16,26,27,28,29,30]],
+                [['குஷன்','தலையணை','போர்வை'],[17,35]],
+                [['தண்ணீர்','பாட்டில்'],[18,33]],
+                [['செடி','செடிகள்','தொட்டி','அலங்காரம்'],[19,20,32]],
+                [['ಹೆಡ್‌ಫೋನ್','ಹೆಡ್‌ಫೋನ್ಸ್','ಸಂಗೀತ','ಹಾಡು'],[1,9,21,25]],
+                [['ಗಡಿಯಾರ','ಸ್ಮಾರ್ಟ್‌ವಾಚ್','ವ್ಯಾಯಾಮ'],[2,15]],
+                [['ಶೂ','ಬೂಟು','ಓಟ','ನಡಿಗೆ'],[3,14]],
+                [['ಚೀಲ','ಬ್ಯಾಗ್','ಪ್ರಯಾಣ'],[4,18,26]],
+                [['ದೀಪ','ಲ್ಯಾಂಪ್','ಓದು','ಮೇಜು'],[5,32]],
+                [['ಕಾಫಿ','ಕ್ಯಾಮೆರಾ','ಫೋಟೋ'],[6,7,23,31]],
+                [['ಹುಡಿ','ಬಟ್ಟೆ','ಶರ್ಟ್'],[8,13,16,29,30]],
+                [['ಸ್ಪೀಕರ್','ಬ್ಲೂಟೂತ್'],[9,21]],
+                [['ಮೌಸ್','ಕಂಪ್ಯೂಟರ್','ಲ್ಯಾಪ್‌ಟಾಪ್'],[10]],
+                [['ಟ್ಯಾಬ್ಲೆಟ್','ಓದುವುದು'],[11]],
+                [['ಗೇಮಿಂಗ್','ಗೇಮ್','ಕಂಟ್ರೋಲರ್'],[22]],
+                [['ಚಾರ್ಜರ್','ಬ್ಯಾಟರಿ'],[24]],
+                [['ಟಿವಿ','ದೂರದರ್ಶನ','ಸಿನಿಮಾ'],[12]],
+                [['ಬಟ್ಟೆ','ಉಡುಪು','ಫ್ಯಾಷನ್'],[13,16,26,27,28,29,30]],
+                [['ಕುಶನ್','ದಿಂಬು','ಕಂಬಳಿ'],[17,35]],
+                [['ನೀರು','ಬಾಟಲಿ'],[18,33]],
+                [['ಗಿಡ','ಗಿಡಗಳು','ಕುಂಡ','ಅಲಂಕಾರ'],[19,20,32]],
+                [['হেডফোন','হেডফোনস','গান','সঙ্গীত'],[1,9,21,25]],
+                [['ঘড়ি','স্মার্টওয়াচ','ব্যায়াম'],[2,15]],
+                [['জুতো','জুতা','দৌড়','হাঁটা'],[3,14]],
+                [['ব্যাগ','ব্যাকপ্যাক','ভ্রমণ'],[4,18,26]],
+                [['বাতি','ল্যাম্প','পড়াশোনা','টেবিল'],[5,32]],
+                [['কফি','ক্যামেরা','ছবি'],[6,7,23,31]],
+                [['হুডি','জামা','শার্ট','পোশাক'],[8,13,16,29,30]],
+                [['স্পিকার','ব্লুটুথ'],[9,21]],
+                [['মাউস','কম্পিউটার','ল্যাপটপ'],[10]],
+                [['ট্যাবলেট','পড়া'],[11]],
+                [['গেমিং','গেম','কন্ট্রোলার'],[22]],
+                [['চার্জার','ব্যাটারি'],[24]],
+                [['টিভি','সিনেমা'],[12]],
+                [['জামাকাপড়','পোশাক','ফ্যাশন'],[13,16,26,27,28,29,30]],
+                [['কুশন','বালিশ','কম্বল'],[17,35]],
+                [['জল','পানি','বোতল'],[18,33]],
+                [['গাছ','গাছপালা','টব','সাজসজ্জা'],[19,20,32]],
+                [['हेडफोन','हेडफ़ोन','संगीत','गाणी'],[1,9,21,25]],
+                [['घड्याळ','स्मार्टवॉच','व्यायाम'],[2,15]],
+                [['बूट','चप्पल','धावणे','चालणे'],[3,14]],
+                [['पिशवी','बॅग','प्रवास'],[4,18,26]],
+                [['दिवा','अभ्यास','टेबल'],[5,32]],
+                [['कॉफी','कॅमेरा','फोटो'],[6,7,23,31]],
+                [['हुडी','कपडे','शर्ट'],[8,13,16,29,30]],
+                [['स्पीकर','ब्लूटूथ'],[9,21]],
+                [['माऊस','संगणक','लॅपटॉप'],[10]],
+                [['टॅबलेट','वाचन'],[11]],
+                [['गेमिंग','गेम','कंट्रोलर'],[22]],
+                [['चार्जर','बॅटरी'],[24]],
+                [['टीव्ही','चित्रपट'],[12]],
+                [['कपडे','पोशाख','फॅशन'],[13,16,26,27,28,29,30]],
+                [['उशी','कुशन','ब्लँकेट'],[17,35]],
+                [['पाणी','बाटली'],[18,33]],
+                [['रोप','झाड','कुंडी','सजावट'],[19,20,32]],
+                [['હેડફોન','સંગીત','ગીત'],[1,9,21,25]],
+                [['ઘડિયાળ','સ્માર્ટવોચ','કસરત'],[2,15]],
+                [['જૂતા','દોડવું','ચાલવું'],[3,14]],
+                [['બેગ','થેલો','મુસાફરી'],[4,18,26]],
+                [['દીવો','અભ્યાસ','ટેબલ'],[5,32]],
+                [['કોફી','કેમેરા','ફોટો'],[6,7,23,31]],
+                [['હૂડી','કપડાં','શર્ટ'],[8,13,16,29,30]],
+                [['સ્પીકર','બ્લૂટૂથ'],[9,21]],
+                [['માઉસ','કમ્પ્યુટર','લેપટોપ'],[10]],
+                [['ટેબ્લેટ','વાંચન'],[11]],
+                [['ગેમિંગ','ગેમ','કંટ્રોલર'],[22]],
+                [['ચાર્જર','બેટરી'],[24]],
+                [['ટીવી','ફિલ્મ'],[12]],
+                [['કપડાં','વસ્ત્રો','ફેશન'],[13,16,26,27,28,29,30]],
+                [['કુશન','તકિયો','ધાબળો'],[17,35]],
+                [['પાણી','બોટલ'],[18,33]],
+                [['છોડ','છોડવા','કુંડું','સજાવટ'],[19,20,32]],
+                [['ഹെഡ്ഫോൺ','ഹെഡ്ഫോൺസ്','സംഗീതം','പാട്ട്'],[1,9,21,25]],
+                [['വാച്ച്','സ്മാർട്ട് വാച്ച്','വ്യായാമം'],[2,15]],
+                [['ഷൂസ്','ചെരുപ്പ്','ഓട്ടം','നടത്തം'],[3,14]],
+                [['ബാഗ്','യാത്ര'],[4,18,26]],
+                [['വിളക്ക്','പഠനം','മേശ'],[5,32]],
+                [['കാപ്പി','ക്യാമറ','ഫോട്ടോ'],[6,7,23,31]],
+                [['ഹൂഡി','വസ്ത്രം','ഷർട്ട്'],[8,13,16,29,30]],
+                [['സ്പീക്കർ','ബ്ലൂടൂത്ത്'],[9,21]],
+                [['മൗസ്','കമ്പ്യൂട്ടർ','ലാപ്ടോപ്പ്'],[10]],
+                [['ടാബ്ലെറ്റ്','വായന'],[11]],
+                [['ഗെയിമിംഗ്','ഗെയിം','കൺട്രോളർ'],[22]],
+                [['ചാർജർ','ബാറ്ററി'],[24]],
+                [['ടിവി','സിനിമ'],[12]],
+                [['വസ്ത്രം','ഫാഷൻ'],[13,16,26,27,28,29,30]],
+                [['കുഷ്യൻ','തലയണ','പുതപ്പ്'],[17,35]],
+                [['വെള്ളം','കുപ്പി'],[18,33]],
+                [['ചെടി','ചെടികൾ','ചട്ടി','അലങ്കാരം'],[19,20,32]],
+                [['डेस्क लैंप','मेज का लैंप','पढ़ने का लैंप'],[5]],
+                [['சட்டை'],[16]],
+                [['जॅकेट','जाकीट'],[13]]
+            );
             function recommendByVoice(){
                 const input=document.getElementById('voice-query'),status=document.getElementById('voice-status'),results=document.getElementById('voice-results'),query=input.value.trim();
                 if(!query){status.textContent='Tell me what you are looking for, or try one of the examples.';results.replaceChildren();input.focus();return}
                 const ignoredWords=new Set(['a','an','and','can','find','for','get','give','i','in','is','it','me','my','of','on','please','show','some','something','the','that','this','to','with','you','your','need','want','looking']);
-                const words=(query.toLowerCase().match(/[a-z0-9]+/g)||[]).filter(word=>!ignoredWords.has(word)),scores=new Map(P.map(p=>[p[0],0]));
+                const normalizedQuery=query.toLowerCase().normalize('NFC').replace(/[^\p{L}\p{M}\p{N}\s]/gu,' ').replace(/\s+/g,' ').trim(),words=(normalizedQuery.match(/[\p{L}\p{M}\p{N}]+/gu)||[]).filter(word=>!ignoredWords.has(word)),scores=new Map(P.map(p=>[p[0],0]));
                 for(const [keywords,ids] of voiceIntents){
-                    const matched=keywords.some(word=>words.includes(word));
+                    const matched=keywords.some(word=>{
+                        const keyword=word.toLowerCase().normalize('NFC').replace(/[^\p{L}\p{M}\p{N}\s]/gu,' ').replace(/\s+/g,' ').trim();
+                        if(keyword.includes(' '))return normalizedQuery.includes(keyword);
+                        return words.some(candidate=>candidate===keyword||(/[\u0900-\u0DFF]/u.test(keyword)&&candidate.startsWith(keyword)));
+                    });
                     if(matched)for(const id of ids)scores.set(id,scores.get(id)+5);
                 }
                 for(const p of P){
@@ -94,8 +240,14 @@ const P=[
                 results.innerHTML=`<div class="voice-result-grid">${matches.map(card).join('')}</div>`;
             }
             function setupVoiceAssistant(){
-                const toggle=document.getElementById('voice-toggle'),panel=document.getElementById('voice-panel'),close=document.getElementById('voice-close'),form=document.getElementById('voice-form'),mic=document.getElementById('voice-mic'),input=document.getElementById('voice-query'),status=document.getElementById('voice-status');
+                const toggle=document.getElementById('voice-toggle'),panel=document.getElementById('voice-panel'),close=document.getElementById('voice-close'),form=document.getElementById('voice-form'),mic=document.getElementById('voice-mic'),input=document.getElementById('voice-query'),status=document.getElementById('voice-status'),language=document.getElementById('voice-language');
                 let activeVoiceRecognition=null;
+                const savedLanguage=localStorage.getItem('ssvoice-language');
+                if(savedLanguage&&Array.from(language.options).some(option=>option.value===savedLanguage))language.value=savedLanguage;
+                language.addEventListener('change',()=>{
+                    localStorage.setItem('ssvoice-language',language.value);
+                    status.textContent='Selected '+language.options[language.selectedIndex].text+'. You can type in this language, or try voice input if your browser supports it.';
+                });
                 toggle.addEventListener('click',()=>{panel.hidden=!panel.hidden;toggle.setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden)input.focus()});
                 close.addEventListener('click',()=>{if(activeVoiceRecognition)activeVoiceRecognition.abort();panel.hidden=true;toggle.setAttribute('aria-expanded','false');toggle.focus()});
                 form.addEventListener('submit',event=>{event.preventDefault();recommendByVoice()});
@@ -103,11 +255,11 @@ const P=[
                     const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
                     if(!SpeechRecognition){status.textContent='Voice input is not supported in this browser. Type your request above to get recommendations.';return}
                     const recognition=new SpeechRecognition();activeVoiceRecognition=recognition;
-                    recognition.lang='en-IN';recognition.interimResults=false;recognition.maxAlternatives=1;
-                    mic.disabled=true;mic.classList.add('is-listening');status.textContent='Listening… Tell me what you are looking for.';
+                    recognition.lang=language.value;recognition.interimResults=false;recognition.maxAlternatives=1;
+                    mic.disabled=true;mic.classList.add('is-listening');status.textContent='Listening in '+language.options[language.selectedIndex].text+'… Tell me what you are looking for.';
                     recognition.onresult=event=>{const transcript=event.results[0]&&event.results[0][0]?event.results[0][0].transcript.trim():'';if(transcript){input.value=transcript;recommendByVoice()}else status.textContent='I didn’t catch that. Try again or type your request.'};
                     recognition.onerror=event=>{
-                        const message=event.error==='not-allowed'||event.error==='service-not-allowed'?'Microphone access was blocked. Allow microphone access or type your request instead.':event.error==='no-speech'?'I didn’t hear anything. Try again or type your request.':'Voice input could not start. You can type your request instead.';
+                        const message=event.error==='not-allowed'||event.error==='service-not-allowed'?'Microphone access was blocked. Allow microphone access or type your request instead.':event.error==='no-speech'?'I didn’t hear anything. Try again or type your request.':event.error==='language-not-supported'?'Your browser speech service does not support this language. Try another browser/device or type your request in this language.':'Voice input could not start. Check your internet connection and microphone permission, or type your request instead.';
                         status.textContent=message;
                     };
                     recognition.onend=()=>{if(activeVoiceRecognition===recognition)activeVoiceRecognition=null;mic.disabled=false;mic.classList.remove('is-listening')};

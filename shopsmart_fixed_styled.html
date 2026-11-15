@@ -24,7 +24,19 @@
                     <div><b>Find it by voice</b><small>Tell us what you need</small></div>
                     <button class="voice-close" id="voice-close" aria-label="Close assistant">×</button>
                 </div>
-                <p class="voice-prompt">Try “I need headphones for listening to music” or “a lamp for my desk”.</p>
+                <p class="voice-prompt">Choose a language, then ask for headphones, a desk lamp, running shoes, or something else you need.</p>
+                <label class="voice-language-label" for="voice-language">Voice language</label>
+                <select class="voice-language" id="voice-language">
+                    <option value="en-IN">English (India)</option>
+                    <option value="hi-IN">हिन्दी (Hindi)</option>
+                    <option value="te-IN">తెలుగు (Telugu)</option>
+                    <option value="ta-IN">தமிழ் (Tamil)</option>
+                    <option value="kn-IN">ಕನ್ನಡ (Kannada)</option>
+                    <option value="bn-IN">বাংলা (Bengali)</option>
+                    <option value="mr-IN">मराठी (Marathi)</option>
+                    <option value="gu-IN">ગુજરાતી (Gujarati)</option>
+                    <option value="ml-IN">മലയാളം (Malayalam)</option>
+                </select>
                 <form id="voice-form" class="voice-form">
                     <label class="sr-only" for="voice-query">Describe what you are looking for</label>
                     <input id="voice-query" type="text" placeholder="I’m looking for..." autocomplete="off">
@@ -33,7 +45,7 @@
                 <button class="voice-mic" id="voice-mic" type="button"><span aria-hidden="true">●</span> Speak your request</button>
                 <p class="voice-status" id="voice-status" role="status" aria-live="polite">Type a request or use your microphone.</p>
                 <div class="voice-results" id="voice-results" aria-live="polite"></div>
-                <p class="voice-disclaimer">Demo recommendations match your request to this store’s products. Speech recognition is provided by your browser.</p>
+                <p class="voice-disclaimer">Recommendations match your request to this store’s products. Speech recognition availability depends on your browser and selected language.</p>
             </div>
             <button class="voice-toggle" id="voice-toggle" type="button" aria-expanded="false" aria-controls="voice-panel"><span aria-hidden="true">✳</span> Shop by voice</button>
         </section>
