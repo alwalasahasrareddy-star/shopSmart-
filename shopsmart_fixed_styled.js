@@ -41,7 +41,7 @@ const P=[
             function card(p){return `<article class="card" onclick="detail(${p[0]})"><div class="pic"><span class="tag">${p[6]}</span><span class="product-emoji">${p[5]}</span><span class="card-arrow" aria-hidden="true">↗</span></div><div class="info"><span class="product-category">${p[2]}</span><h3>${p[1]}</h3><div class="product-bottom"><div><div class="stars">★★★★★ <span class="muted">4.8</span></div><div class="price">${money(p[3])} <span class="old">${money(p[4])}</span></div></div><button aria-label="Add ${p[1]} to bag" onclick="event.stopPropagation();add(${p[0]})">+</button></div></div></article>`}
             function products(title,arr,sub=''){return `<div class="rowtitle"><div><h2>${title}</h2><span class="muted">${sub}</span></div><button onclick="catalog()">View all →</button></div><div class="grid">${arr.map(card).join('')}</div>`}
             function home(){scrollTo(0,0);document.getElementById('app').innerHTML=`<div class="wrap"><section class="hero"><div class="hero-copy"><span class="eyebrow"><i></i> THE EVERYDAY EDIT · VOL. 01</span><h1>Good taste.<br><span>Great finds.</span></h1><p>Meet the little upgrades that make every day feel a little more you.</p><button class="hero-cta" onclick="catalog()">Explore the collection <span>↗</span></button><div class="hero-note"><span class="avatar-stack"><i>✦</i><i>♡</i><i>✳</i></span><span>Loved by curious shoppers<br><b>Thoughtful picks, always.</b></span></div></div><div class="hero-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="hero-product hero-product-main"><span>✦ EDITOR'S PICK</span><b>🎧</b><small>Sound, reimagined.</small></div><div class="hero-product hero-product-float"><b>⌚</b><small>Your day, in sync.</small></div><div class="hero-sparkle sparkle-one">✳</div><div class="hero-sparkle sparkle-two">✦</div><div class="hero-sticker">MADE FOR<br>YOUR EVERYDAY</div></div><div class="hero-index">01 <span>/</span> 04</div></section><section class="category-section"><div class="section-heading"><div><span class="eyebrow">A LITTLE OF EVERYTHING</span><h2>Find your kind of thing</h2></div><button onclick="catalog()">Explore all <span>↗</span></button></div><div class="category-grid">${[['Electronics','Tech that just clicks','🎧','category-tech'],['Fashion','Wear it your way','👟','category-style'],['Home','Make space feel yours','🪴','category-home']].map(([c,sub,icon,cls])=>`<button class="category-tile ${cls}" onclick="cat='${c}';catalog()"><span class="category-icon">${icon}</span><span class="category-copy"><b>${c}</b><small>${sub}</small></span><span class="category-arrow">↗</span></button>`).join('')}</div></section><div class="recommend-banner"><div class="recommend-icon">✳</div><div><span>YOUR NEXT GOOD FIND</span><b>A smartwatch that keeps up with you.</b></div><button onclick="detail(2)">Meet your match <span>↗</span></button></div>${products('The ones everyone loves',P.slice(0,4),'A few current favourites, picked for you')}${products('A little more your style',[P[1],P[0],P[3],P[2]],'A smarter mix based on what you are exploring')}<div class="hint">✨ <b>A little note about recommendations:</b> This demo uses sample browsing patterns. Real recommendations learn from clicks, purchases, ratings, and customer preferences.</div></div>`}
-            function catalog(){scrollTo(0,0);let a=P.filter(p=>(cat==='All'||p[2]===cat)&&(!term||(p[1]+' '+p[2]).toLowerCase().includes(term)));document.getElementById('app').innerHTML=`<div class="wrap"><div class="crumb" onclick="home()">Home / Shop</div><h1>Explore products</h1><p class="muted">Choose a product to open its details page.</p><div class="chips">${['All','Electronics','Fashion','Home'].map(c=>`<button class="chip ${cat===c?'active':''}" onclick="cat='${c}';catalog()">${c}</button>`).join('')}</div><div class="rowtitle"><h2>${term?'Search results':'All products'}</h2><span class="muted">${a.length} products</span></div>${a.length?`<div class="grid">${a.map(card).join('')}</div>`:'<div class="empty">No products found. Try another search.</div>'}</div>`}
+            function catalog(){scrollTo(0,0);let queryScores=term?scoreVoiceQuery(term):null,a=P.filter(p=>(cat==='All'||p[2]===cat)&&(!term||(p[1]+' '+p[2]).toLowerCase().includes(term)||queryScores.get(p[0])>0));document.getElementById('app').innerHTML=`<div class="wrap"><div class="crumb" onclick="home()">Home / Shop</div><h1>Explore products</h1><p class="muted">Choose a product to open its details page.</p><div class="chips">${['All','Electronics','Fashion','Home'].map(c=>`<button class="chip ${cat===c?'active':''}" onclick="cat='${c}';catalog()">${c}</button>`).join('')}</div><div class="rowtitle"><h2>${term?'Search results':'All products'}</h2><span class="muted">${a.length} products</span></div>${a.length?`<div class="grid">${a.map(card).join('')}</div>`:'<div class="empty">No products found. Try another search.</div>'}</div>`}
             function search(){term=document.getElementById('q').value.toLowerCase().trim();cat='All';catalog()}
             function detail(id){scrollTo(0,0);let p=get(id),related=P.filter(x=>x[0]!==id&&x[2]===p[2]).slice(0,4);if(related.length<4)related=related.concat(P.filter(x=>x[0]!==id&&!related.includes(x)).slice(0,4-related.length));document.getElementById('app').innerHTML=`<div class="wrap"><div class="crumb"><a onclick="home()">Home</a> / <a onclick="catalog()">Shop</a> / ${p[1]}</div><div class="detail"><div class="bigpic">${p[5]}</div><div><span class="muted">${p[6]} · ${p[2]}</span><h1>${p[1]}</h1><div class="stars">★★★★★ <span class="muted">4.8 / 5 · Demo rating</span></div><div class="price">${money(p[3])} <span class="old">${money(p[4])}</span></div><p>${p[7]}</p><p>Quantity: <button class="chip" onclick="qty(-1)">−</button> <b id="qty">1</b> <button class="chip" onclick="qty(1)">+</button></p><button onclick="add(${id},Number(document.getElementById('qty').textContent))">Add to cart</button> <button class="chip" onclick="cartPage()">Go to cart</button><div class="hint">🤖 <b>Recommended because:</b> This item matches the category you are exploring. A real recommendation engine would use your activity and preferences.</div></div></div>${products('You may also like',related,'Similar products selected by category')}</div>`;window.n=1}
             function qty(d){window.n=Math.max(1,Math.min(10,(window.n||1)+d));document.getElementById('qty').textContent=window.n}
@@ -217,9 +217,45 @@ const P=[
                 [['சட்டை'],[16]],
                 [['जॅकेट','जाकीट'],[13]]
             );
-            function recommendByVoice(){
-                const input=document.getElementById('voice-query'),status=document.getElementById('voice-status'),results=document.getElementById('voice-results'),query=input.value.trim();
-                if(!query){status.textContent='Tell me what you are looking for, or try one of the examples.';results.replaceChildren();input.focus();return}
+            const localizedProductTerms=[
+                [1,['हेडफोन','హెడ్‌ఫోన్','ஹெட்போன்','ಹೆಡ್‌ಫೋನ್','হেডফোন','हेडफोन','હેડફોન','ഹെഡ്ഫോൺ']],
+                [2,['स्मार्ट घड़ी','స్మార్ట్ వాచ్','ஸ்மார்ட் வாட்ச்','ಸ್ಮಾರ್ಟ್ ವಾಚ್','স্মার্ট ঘড়ি','स्मार्ट घड्याळ','સ્માર્ટ વૉચ','സ്മാർട്ട് വാച്ച്']],
+                [3,['दौड़ने के जूते','రన్నింగ్ షూస్','ஓடும் காலணி','ಓಟದ ಶೂಗಳು','দৌড়ানোর জুতো','धावण्याचे बूट','દોડવાના શૂઝ','ഓട്ടത്തിനുള്ള ഷൂസ്']],
+                [4,['पीठ का बैग','బ్యాక్‌ప్యాక్','முதுகுப்பை','ಬೆನ್ನಿನ ಚೀಲ','পিঠের ব্যাগ','पाठीची बॅग','પીઠની બેગ','പുറത്തിടുന്ന ബാഗ്']],
+                [5,['डेस्क लैंप','డెస్క్ ల్యాంప్','மேசை விளக்கு','ಮೇಜಿನ ದೀಪ','ডেস্ক ল্যাম্প','टेबल दिवा','ટેબલ લેમ્પ','മേശ വിളക്ക്']],
+                [6,['कॉफी बनाने की मशीन','కాఫీ మేకర్','காபி தயாரிக்கும் இயந்திரம்','ಕಾಫಿ ಮಾಡುವ ಯಂತ್ರ','কফি মেকার','कॉफी मेकर','કોફી મેકર','കാപ്പി മേക്കർ']],
+                [7,['इंस्टेंट कैमरा','ఇన్‌స్టంట్ కెమెరా','உடனடி கேமரா','ತಕ್ಷಣದ ಕ್ಯಾಮೆರಾ','ইনস্ট্যান্ট ক্যামেরা','इन्स्टंट कॅमेरा','ઇન્સ્ટન્ટ કેમેરા','ഇൻസ്റ്റന്റ് ക്യാമറ']],
+                [8,['हुडी','హూడీ','ஹூடி','ಹೂಡಿ','হুডি','हुडी','હૂડી','ഹൂഡി']],
+                [9,['ब्लूटूथ स्पीकर','బ్లూటూత్ స్పీకర్','ப்ளூடூத் ஸ்பீக்கர்','ಬ್ಲೂಟೂತ್ ಸ್ಪೀಕರ್','ব্লুটুথ স্পিকার','ब्लूटूथ स्पीकर','બ્લૂટૂથ સ્પીકર','ബ്ലൂടൂത്ത് സ്പീക്കർ']],
+                [10,['कंप्यूटर माउस','కంప్యూటర్ మౌస్','கணினி மவுஸ்','ಕಂಪ್ಯೂಟರ್ ಮೌಸ್','কম্পিউটার মাউস','कॉम्प्युटर माऊस','કમ્પ્યુટર માઉસ','കമ്പ്യൂട്ടർ മൗസ്']],
+                [11,['टैबलेट','టాబ్లెట్','டேப்லெட்','ಟ್ಯಾಬ್ಲೆಟ್','ট্যাবলেট','टॅबलेट','ટેબ્લેટ','ടാബ്ലെറ്റ്']],
+                [12,['स्मार्ट टीवी','స్మార్ట్ టీవీ','ஸ்மார்ட் டிவி','ಸ್ಮಾರ್ಟ್ ಟಿವಿ','স্মার্ট টিভি','स्मार्ट टीव्ही','સ્માર્ટ ટીવી','സ്മാർട്ട് ടിവി']],
+                [13,['डेनिम जैकेट','డెనిమ్ జాకెట్','டெனிம் ஜாக்கெட்','ಡೆನಿಮ್ ಜಾಕೆಟ್','ডেনিম জ্যাকেট','डेनिम जॅकेट','ડેનિમ જેકેટ','ഡെനിം ജാക്കറ്റ്']],
+                [14,['स्नीकर्स','స్నీకర్స్','ஸ்னீக்கர்கள்','ಸ್ನೀಕರ್ಸ್','স্নিকার্স','स्नीकर्स','સ્નીકર્સ','സ്നീക്കേഴ്സ്']],
+                [15,['कलाई घड़ी','మణికట్టు గడియారం','கைக்கடிகாரம்','ಕೈಗಡಿಯಾರ','হাতঘড়ি','मनगटी घड्याळ','કાંડા ઘડિયાળ','കൈഘടികാരം']],
+                [16,['सूती शर्ट','కాటన్ షర్ట్','பருத்தி சட்டை','ಹತ್ತಿಯ ಅಂಗಿ','সুতির শার্ট','सुती शर्ट','સુતરાઉ શર્ટ','പരുത്തി ഷർട്ട്']],
+                [17,['कुशन का सेट','కుషన్ సెట్','குஷன் தொகுப்பு','ಕುಶನ್ ಸೆಟ್','কুশন সেট','कुशन सेट','કુશન સેટ','കുഷ്യൻ സെറ്റ്']],
+                [18,['ट्रैवल मग','ట్రావెల్ మగ్','பயணக் குவளை','ಪ್ರಯಾಣದ ಮಗ್','ট্রাভেল মগ','प्रवासाचा मग','ટ્રાવેલ મગ','യാത്രാ മഗ്']],
+                [19,['गमले का पौधा','కుండీలో మొక్క','தொட்டிச் செடி','ಕುಂಡದ ಗಿಡ','টবের গাছ','कुंडीतील रोप','કુંડાનો છોડ','ചട്ടിയിലെ ചെടി']],
+                [20,['सजावटी लाइट की लड़ियां','స్ట్రింగ్ లైట్లు','அலங்கார விளக்கு சரம்','ಅಲಂಕಾರದ ದೀಪಗಳ ಸರ','আলোর মালা','स्ट्रिंग लाईट्स','સ્ટ્રિંગ લાઇટ્સ','സ്ട്രിംഗ് ലൈറ്റുകൾ']],
+                [21,['वायरलेस ईयरबड्स','వైర్‌లెస్ ఇయర్‌బడ్స్','வயர்லெஸ் இயர்பட்ஸ்','ವೈರ್‌ಲೆಸ್ ಇಯರ್‌ಬಡ್ಸ್','ওয়্যারলেস ইয়ারবাড','वायरलेस इयरबड्स','વાયરલેસ ઇયરબડ્સ','വയർലെസ് ഇയർബഡ്സ്']],
+                [22,['गेम कंट्रोलर','గేమ్ కంట్రోలర్','கேம் கன்ட்ரோலர்','ಗೇಮ್ ಕಂಟ್ರೋಲರ್','গেম কন্ট্রোলার','गेम कंट्रोलर','ગેમ કંટ્રોલર','ഗെയിം കൺട്രോളർ']],
+                [23,['वेबकैम','వెబ్‌క్యామ్','வெப்கேம்','ವೆಬ್‌ಕ್ಯಾಮ್','ওয়েবক্যাম','वेबकॅम','વેબકેમ','വെബ്ക്യാം']],
+                [24,['पोर्टेबल चार्जर','పోర్టబుల్ ఛార్జర్','கையடக்க சார்ஜர்','ಪೋರ್ಟಬಲ್ ಚಾರ್ಜರ್','পোর্টেবল চার্জার','पोर्टेबल चार्जर','પોર્ટેબલ ચાર્જર','പോർട്ടബിൾ ചാർജർ']],
+                [25,['ओवर इयर हेडफोन','ఓవర్ ఇయర్ హెడ్‌ఫోన్స్','ஓவர் இயர் ஹெட்போன்','ಓವರ್ ಇಯರ್ ಹೆಡ್‌ಫೋನ್','ওভার ইয়ার হেডফোন','ओव्हर इयर हेडफोन','ઓવર ઇયર હેડફોન','ഓവർ ഇയർ ഹെഡ്ഫോൺ']],
+                [26,['कैनवास टोट बैग','కాన్వాస్ టోట్ బ్యాగ్','கேன்வாஸ் கைப்பை','ಕ್ಯಾನ್ವಾಸ್ ಟೋಟ್ ಬ್ಯಾಗ್','ক্যানভাস টোট ব্যাগ','कॅनव्हास टोट बॅग','કેનવાસ ટોટ બેગ','ക്യാൻവാസ് ടോട്ട് ബാഗ്']],
+                [27,['योगा लेगिंग्स','యోగా లెగ్గింగ్స్','யோகா லெக்கிங்ஸ்','ಯೋಗ ಲೆಗ್ಗಿಂಗ್ಸ್','যোগা লেগিংস','योगा लेगिंग्स','યોગા લેગિંગ્સ','യോഗ ലെഗ്ഗിൻസ്']],
+                [28,['चमड़े का बटुआ','లెదర్ వాలెట్','தோல் பணப்பை','ಚರ್ಮದ ಪರ್ಸ್','চামড়ার মানিব্যাগ','चामड्याचे पाकीट','ચામડાનું પાકીટ','ലെതർ വാലറ്റ്']],
+                [29,['बुनी हुई टोपी','నిట్ టోపీ','கம்பளித் தொப்பி','ಹೆಣೆದ ಟೋಪಿ','বোনা টুপি','विणलेली टोपी','ગૂંથેલી ટોપી','നെയ്ത തൊപ്പി']],
+                [30,['गर्मियों की पोशाक','వేసవి దుస్తులు','கோடைக்கால உடை','ಬೇಸಿಗೆಯ ಉಡುಗೆ','গ্রীষ্মের পোশাক','उन्हाळी ड्रेस','ઉનાળાનો ડ્રેસ','വേനൽക്കാല വസ്ത്രം']],
+                [31,['फ्रेंच प्रेस कॉफी मेकर','ఫ్రెంచ్ ప్రెస్ కాఫీ మేకర్','ஃபிரெஞ்ச் பிரஸ் காபி மேக்கர்','ಫ್ರೆಂಚ್ ಪ್ರೆಸ್ ಕಾಫಿ ಮೇಕರ್','ফ্রেঞ্চ প্রেস কফি মেকার','फ्रेंच प्रेस कॉफी मेकर','ફ્રેન્ચ પ્રેસ કોફી મેકર','ഫ്രഞ്ച് പ്രസ് കാപ്പി മേക്കർ']],
+                [32,['रात की लाइट','నైట్ లైట్','இரவு விளக்கு','ರಾತ್ರಿ ದೀಪ','রাতের বাতি','रात्रीचा दिवा','રાતનો દીવો','രാത്രി വിളക്ക്']],
+                [33,['पानी की बोतल','నీటి బాటిల్','தண்ணீர் பாட்டில்','ನೀರಿನ ಬಾಟಲಿ','পানির বোতল','पाण्याची बाटली','પાણીની બોટલ','വെള്ളക്കുപ്പി']],
+                [34,['डेस्क ऑर्गनाइज़र','డెస్క్ ఆర్గనైజర్','மேசை ஒழுங்கமைப்பான்','ಮೇಜಿನ ಆರ್ಗನೈಸರ್','ডেস্ক অর্গানাইজার','डेस्क ऑर्गनायझर','ડેસ્ક ઓર્ગેનાઇઝર','ഡെസ്ക് ഓർഗനൈസർ']],
+                [35,['सूती कंबल','కాటన్ దుప్పటి','பருத்திப் போர்வை','ಹತ್ತಿಯ ಹೊದಿಕೆ','সুতির কম্বল','सुती ब्लँकेट','સુતરાઉ ધાબળો','പരുത്തി പുതപ്പ്']]
+            ];
+            for(const [id,terms] of localizedProductTerms)voiceIntents.push([terms,[id]]);
+            function scoreVoiceQuery(query){
                 const ignoredWords=new Set(['a','an','and','can','find','for','get','give','i','in','is','it','me','my','of','on','please','show','some','something','the','that','this','to','with','you','your','need','want','looking']);
                 const normalizedQuery=query.toLowerCase().normalize('NFC').replace(/[^\p{L}\p{M}\p{N}\s]/gu,' ').replace(/\s+/g,' ').trim(),words=(normalizedQuery.match(/[\p{L}\p{M}\p{N}]+/gu)||[]).filter(word=>!ignoredWords.has(word)),scores=new Map(P.map(p=>[p[0],0]));
                 for(const [keywords,ids] of voiceIntents){
@@ -234,6 +270,12 @@ const P=[
                     const titleWords=p[1].toLowerCase().match(/[a-z0-9]+/g)||[],productWords=(p[2]+' '+p[6]+' '+p[7]).toLowerCase().match(/[a-z0-9]+/g)||[];
                     for(const word of words){if(word.length>2&&titleWords.includes(word))scores.set(p[0],scores.get(p[0])+5);else if(word.length>2&&productWords.includes(word))scores.set(p[0],scores.get(p[0])+1)}
                 }
+                return scores;
+            }
+            function recommendByVoice(){
+                const input=document.getElementById('voice-query'),status=document.getElementById('voice-status'),results=document.getElementById('voice-results'),query=input.value.trim();
+                if(!query){status.textContent='Tell me what you are looking for, or try a product name in any supported language.';results.replaceChildren();input.focus();return}
+                const scores=scoreVoiceQuery(query);
                 const matches=P.filter(p=>scores.get(p[0])>0).sort((a,b)=>scores.get(b[0])-scores.get(a[0])||a[3]-b[3]).slice(0,4);
                 if(!matches.length){status.textContent='I couldn’t find a close match. Try “headphones for music”, “a desk lamp”, or “something for running”.';results.replaceChildren();return}
                 status.textContent='Here are a few good matches for “'+query+'”.';
@@ -251,19 +293,33 @@ const P=[
                 toggle.addEventListener('click',()=>{panel.hidden=!panel.hidden;toggle.setAttribute('aria-expanded',String(!panel.hidden));if(!panel.hidden)input.focus()});
                 close.addEventListener('click',()=>{if(activeVoiceRecognition)activeVoiceRecognition.abort();panel.hidden=true;toggle.setAttribute('aria-expanded','false');toggle.focus()});
                 form.addEventListener('submit',event=>{event.preventDefault();recommendByVoice()});
-                mic.addEventListener('click',()=>{
+                mic.addEventListener('click',async()=>{
                     const SpeechRecognition=window.SpeechRecognition||window.webkitSpeechRecognition;
                     if(!SpeechRecognition){status.textContent='Voice input is not supported in this browser. Type your request above to get recommendations.';return}
+                    if(navigator.permissions&&navigator.permissions.query){
+                        try{
+                            const microphonePermission=await navigator.permissions.query({name:'microphone'});
+                            if(microphonePermission.state==='denied'){
+                                status.textContent='Microphone access is blocked. In Chrome or Edge, open the site controls beside the address bar, set Microphone to Allow, then reload this page. Also check Windows Settings > Privacy & security > Microphone. You can still type your request in the selected language.';
+                                return;
+                            }
+                        }catch(error){
+                            status.textContent='Check that this page and your browser have microphone permission. You can also type your request in the selected language.';
+                        }
+                    }
                     const recognition=new SpeechRecognition();activeVoiceRecognition=recognition;
                     recognition.lang=language.value;recognition.interimResults=false;recognition.maxAlternatives=1;
                     mic.disabled=true;mic.classList.add('is-listening');status.textContent='Listening in '+language.options[language.selectedIndex].text+'… Tell me what you are looking for.';
                     recognition.onresult=event=>{const transcript=event.results[0]&&event.results[0][0]?event.results[0][0].transcript.trim():'';if(transcript){input.value=transcript;recommendByVoice()}else status.textContent='I didn’t catch that. Try again or type your request.'};
                     recognition.onerror=event=>{
-                        const message=event.error==='not-allowed'||event.error==='service-not-allowed'?'Microphone access was blocked. Allow microphone access or type your request instead.':event.error==='no-speech'?'I didn’t hear anything. Try again or type your request.':event.error==='language-not-supported'?'Your browser speech service does not support this language. Try another browser/device or type your request in this language.':'Voice input could not start. Check your internet connection and microphone permission, or type your request instead.';
+                        const message=event.error==='not-allowed'||event.error==='service-not-allowed'?'Microphone or speech access was denied. Allow the microphone in the site controls beside the address bar and Windows microphone privacy settings, then reload. You can type your request meanwhile.':event.error==='no-speech'?'I didn’t hear anything. Check that the microphone is connected and unmuted, then try again or type your request.':event.error==='audio-capture'?'No microphone is available. Connect and unmute a microphone, or type your request.':event.error==='language-not-supported'?'Your browser speech service does not support this language. Try another browser/device or type your request in this language.':event.error==='network'?'The browser speech service needs an internet connection. Check your connection or type your request.':'Voice input could not start. Check microphone permissions and your internet connection, or type your request instead.';
                         status.textContent=message;
                     };
                     recognition.onend=()=>{if(activeVoiceRecognition===recognition)activeVoiceRecognition=null;mic.disabled=false;mic.classList.remove('is-listening')};
-                    try{recognition.start()}catch(error){activeVoiceRecognition=null;mic.disabled=false;mic.classList.remove('is-listening');status.textContent='Voice input could not start. You can type your request instead.'}
+                    try{recognition.start()}catch(error){
+                        activeVoiceRecognition=null;mic.disabled=false;mic.classList.remove('is-listening');
+                        status.textContent=error.name==='NotAllowedError'?'Microphone or speech access was denied. Allow it in the site controls beside the address bar and Windows microphone privacy settings, then reload.':error.name==='NotSupportedError'?'This browser does not support speech recognition. Try a supported browser or type your request.':'The browser could not start speech recognition ('+(error.name||'unknown error')+'). Check microphone permissions and your internet connection, or type your request.';
+                    }
                 });
             }
             sync();setupVoiceAssistant();home();

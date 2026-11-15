@@ -5,9 +5,9 @@ ShopSmart is a responsive, browser-based shopping demo with a 35-product catalog
 ## Features
 
 - Browse products across electronics, fashion, and home categories.
-- Search the catalog, open product details, and see related products.
+- Search the catalog in English or any of the supported Indian-language scripts, open product details, and see related products.
 - Add and remove items from the cart. Cart contents are saved in browser `localStorage`.
-- Ask for product suggestions by typing or speaking a request. The assistant matches request keywords to products in the catalog.
+- Ask for any catalog product by typing or speaking its name or a supported product keyword in English, Hindi, Telugu, Tamil, Kannada, Bengali, Marathi, Gujarati, or Malayalam.
 - Choose English (India), Hindi, Telugu, Tamil, Kannada, Bengali, Marathi, Gujarati, or Malayalam for voice requests. The selected speech-recognition locale is passed to the browser.
 - Use the responsive interface on desktop and mobile.
 
@@ -41,7 +41,7 @@ Stop the server with `Ctrl+C`.
 
 ## Voice assistant
 
-Open **Shop by voice**, choose a language, enter a request or select **Speak your request**, and allow microphone access when prompted. Text recommendations support product keywords in the listed Indian-language scripts. Actual speech recognition depends on the selected language being supported by the browser's speech service, as well as microphone permission and an internet connection. If the browser does not support a selected language, the assistant displays an error and you can type the request in that language instead. Using `localhost` (or HTTPS) provides a secure context for browser microphone features.
+Open **Shop by voice**, choose a language, enter a request or select **Speak your request**, and allow microphone access when prompted. Text recommendations support product keywords in the listed Indian-language scripts. Actual speech recognition depends on the selected language being supported by the browser's speech service, as well as microphone permission and an internet connection. If access is blocked, allow Microphone in the site controls beside the address bar and in Windows **Settings > Privacy & security > Microphone**, then reload. If the browser does not support a selected language, the assistant displays an error and you can type the request in that language instead. Using `localhost` (or HTTPS) provides a secure context for browser microphone features.
 
 The voice assistant is a client-side demonstration, **not a trained AI model**. It uses keyword and intent matching against the sample catalog. Speech recognition is supplied by the browser and can have different language support depending on the browser and device.
 
